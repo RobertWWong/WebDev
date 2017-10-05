@@ -1,0 +1,1 @@
+	some stuff you gotta remember to do\n  source env/bin/activate" >> virtualEnvThings.txt 

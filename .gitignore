@@ -1,3 +1,4 @@
 meanSTACK/*
 ENV/*
-
+*.sqlite3
+*pyc

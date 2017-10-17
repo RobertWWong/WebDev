@@ -1,0 +1,14 @@
+
+<!-- I'm not sure what the hell that is written in bellow. EJS? -->
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+    <!-- time to use a our template module to its fullest -->
+        <!-- <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li> -->
+        <!-- check your name arg in urls.py -->
+        <li><a href="{% url 'polls:detail' question.id %}">	{{ question.q_text}}	</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

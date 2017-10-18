@@ -1,11 +1,12 @@
 from django.shortcuts import get_object_or_404,render
 
-from django.http import HttpResponse  	#Dont need this if we use render()
+from django.http import HttpResponse, HttpResponseRedirect  	#Dont need this if we use render()
 from django.http import Http404
 
 from django.template import loader 		#Dont need this if we use render()
 
-from .models import Question
+from .models import Question, Choice
+from django.urls import reverse
 # Create your views here. You will be assigning url regex via urls.py of your resepect view directory
 
 def index(request):
@@ -44,8 +45,25 @@ def detail( request, q_id):
 
 
 def results(request, q_id):
-	response = "You're looking at question %s." 
-	return HttpResponse(response % q_id)		#Use a str var to later format it
+	# response = "You're looking at question %s." 
+	# return HttpResponse(response % q_id)		#Use a str var to later format it
+	quest = get_object_or_404(Question, pk=q_id)
+	return render ( request, 'polls/results.html', {'question': quest})
+
 def vote(request, q_id):
-	return HttpResponse("You're voting on question %s." % q_id)
+	quest = get_object_or_404(Question, pk = q_id)
+	try:
+		selected_choice = quest.choice_set.get(pk=request.POST['choice'])
+	except(KeyError, Choice.DoesNotExist) :
+		whoopsies = {'question': quest, 'error_message': "You didn't select a choice, pham."}
+		return render(request, 'polls/detail.html', whoopsies)
+	else:
+		selected_choice.votes +=1
+		selected_choice.save()
+		# Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+		return HttpResponseRedirect(reverse ( "polls:results", args=(quest.id,)))
+
+	# return HttpResponse("You're voting on question %s." % q_id)
 

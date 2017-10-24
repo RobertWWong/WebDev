@@ -15,7 +15,8 @@ class Question(models.Model):
 		return self.q_text
 	
 	def was_pub_recently(self):
-		return self.pub_date >= timezone.now()
+		now = timezone.now()
+		return  now - dt.timedelta(days=1) <= self.pub_date <=now
 
 	def create_choices(self, choice, vote_num):
 		"""

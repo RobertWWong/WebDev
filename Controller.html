@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assuming Direct Control</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+	<script type="text/javascript" src="ctrl.js"></script>
+</head>
+<body ng-app = "deApp">
+
+	<h1>Resistence is futile.</h1>
+	<div ng-controller="appCtrl" > 
+		{{ message }}
+		<br>
+		<form ng-submit="updateMessage(newMsg)">
+			<input type="text" ng-model='newMsg'>
+			<button type="submit">Set Me Free!</button>
+		</form>
+	</div>
+	
+
+</body>
+</html>

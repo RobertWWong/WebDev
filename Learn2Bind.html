@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>		
+
+	<title>Welcome to AngularJS 1-not-01</title>	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+	
+	</head>
+	
+<body>
+
+	<p>Welcome to my Domain</p>
+	<div ng-app="">
+		<h1> Let's talke about Databinding</h1>
+		<input type="text" ng-model="msg" >
+		<p> {{ msg }} it is!</p> <br>
+
+		<h1 ng-bind="'Binding ' + wat"> This won't show up at all if ng-bind is used</h1>
+		<input type="text" ng-model="wat">
+		<p ng-bind="wat"> It's just another way to evaluate the model without {}. Be warn, it doesn't display anything but its binding.</p>
+		<p ng-bind='wat + wat+" Im twice as long(minus that segment) " '></p>
+		<br>
+
+		<h1 ng-bind="'One time Binds are ' + huh" >Time for one-time binding</h1>
+		<input model='huh' ng-init="huh = 'arent synchronized after they are read' ">
+		<p ng-bind="::huh ==='hwat' ">Can't be modified anymore</p>
+	</div>
+
+
+
+</body>
+
+</html>
